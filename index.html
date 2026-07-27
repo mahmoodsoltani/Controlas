@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کنترل آموز شرق | اتوماسیون صنعتی زیمنس و DeltaV Emerson</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --main-blue: #003366;
+            --nav-blue: #0055a4;
+            --footer-blue: #002244;
+            --btn-orange: #ff9900;
+            --siemens-teal: #009999;
+        }
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--main-blue);
+            color: #fff;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 24px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+        header .etc-logo {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--btn-orange);
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+        header .contact-info { font-size: 14px; text-align: left; }
+        nav {
+            background-color: var(--nav-blue);
+            padding: 10px 50px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 5px 20px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover, nav a.active {
+            color: var(--btn-orange);
+            border-bottom: 2px solid var(--btn-orange);
+        }
+        .page-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .page-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0, 30, 60, 0.7), rgba(0, 50, 100, 0.7)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+        .hero h2 { font-size: 36px; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+        .hero p { font-size: 18px; max-width: 700px; padding: 0 20px; }
+        .btn {
+            background-color: var(--btn-orange);
+            color: #fff;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        .btn:hover { background-color: #e68a00; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            color: var(--main-blue);
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--btn-orange);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .text-center { text-align: center; }
+        .about-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            margin-bottom: 50px;
+            border-top: 5px solid var(--siemens-teal);
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid #e1e1e1;
+        }
+        .card:hover { transform: translateY(-5px); border: 1px solid var(--siemens-teal); }
+        .card img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            background-color: #f8f9fa; 
+            padding: 10px;
+        }
+        .card-content { padding: 20px; }
+        .card-content h3 { color: var(--nav-blue); margin-top: 0; font-size: 20px; border-right: 4px solid var(--siemens-teal); padding-right: 10px; }
+        
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .service-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            border-right: 4px solid var(--btn-orange);
+        }
+        .service-item span {
+            font-size: 24px;
+            color: var(--siemens-teal);
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .project-category {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--nav-blue);
+        }
+        .project-category h3 {
+            color: var(--main-blue);
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .project-list { list-style: none; padding: 0; }
+        .project-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-list li:last-child { border-bottom: none; }
+        .project-tag {
+            background: #e6f7f7;
+            color: var(--siemens-dark);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            white-space: nowrap;
+            margin-right: 10px;
+        }
+
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--siemens-teal);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 153, 153, 0.3);
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--nav-blue);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            transition: 0.3s;
+        }
+        .contact-form button:hover { background-color: var(--main-blue); }
+        .contact-info-box { background: var(--main-blue); color: #fff; padding: 30px; border-radius: 10px; border-right: 5px solid var(--btn-orange); }
+        .contact-info-box p { margin-bottom: 20px; }
+        footer { background-color: var(--footer-blue); color: #fff; text-align: center; padding: 20px 50px; margin-top: 50px; }
+        @media (max-width: 768px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+            header { flex-direction: column; text-align: center; }
+            header .contact-info { text-align: center; margin-top: 10px; }
+            .project-list li { flex-direction: column; align-items: flex-start; }
+            .project-tag { margin-top: 5px; margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 onclick="showPage('home')">
+            <span class="etc-logo">ETC</span>
+            کنترل آموز شرق <span style="font-size:14px; font-weight:normal;">(Controlas.ir)</span>
+        </h1>
+        <div class="contact-info">
+            <p>تلفن: 00989338204351</p>
+            <p>ایمیل: control.amooz@gmail.com</p>
+        </div>
+    </header>
+
+    <nav>
+        <a onclick="showPage('home')" id="nav-home" class="active">صفحه اصلی</a>
+        <a onclick="showPage('about')" id="nav-about">درباره ما</a>
+        <a onclick="showPage('systems')" id="nav-systems">سیستم‌ها و خدمات</a>
+        <a onclick="showPage('projects')" id="nav-projects">رزومه و پروژه‌ها</a>
+        <a onclick="showPage('contact')" id="nav-contact">تماس با ما</a>
+    </nav>
+
+    <!-- صفحه اصلی -->
+    <div id="page-home" class="page-content active">
+        <div class="hero">
+            <h2>اتوماسیون صنعتی و کنترل پیشرفته</h2>
+            <p>مشاوره، طراحی و اجرای سیستم‌های ابزار دقیق و اتوماسیون صنعتی با تخصص در PLC زیمنس و DeltaV Emerson از سال ۱۳۸۴</p>
+            <button class="btn" onclick="showPage('contact')">مشاوره و تماس با ما</button>
+        </div>
+        <div class="container">
+            <div class="about-box">
+                <h2 class="section-title">کنترل آموز شرق</h2>
+                <p>ورود تکنولوژی‌های جدید به صنایع کشور و رشد سریع آن‌ها در عرصه اتوماسیون بدون پشتیبانی نیروهای متخصص و آموزش‌دیده عملاً کمک چندانی به صنایع نخواهد کرد. این امر ما را بر آن داشت تا در سال ۱۳۸۴ شرکتی را جهت پشتیبانی، مشاوره، طراحی، اجرا و آموزش سیستم‌های اتوماسیون صنعتی تاسیس نماییم.</p>
+            </div>
+            
+            <div class="text-center">
+                <h2 class="section-title">سیستم‌های تخصصی ما</h2>
+            </div>
+            <div class="cards">
+                <!-- عکس واقعی S7-1200 زیمنس -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/144dc3da-c4d6-4140-8436-aaad457136cf.png?auth_key=1884656550-e2b249c666d74981bf9e964f8e9aab3d-0-0ed725708195b22ac2416ec8c06292b8" alt="PLC S7-1200" style="object-fit: contain;">
+                    <div class="card-content">
+                        <h3>PLC زیمنس S7-1200</h3>
+                        <p>ارائه سخت‌افزار و برنامه‌نویسی PLC های فشرده S7-1200 مناسب برای اتوماسیون خطوط کوچک و متوسط صنعتی.</p>
+                    </div>
+                </div>
+                <!-- عکس واقعی S7-1500 زیمنس -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f6e2057f-3488-4a48-b532-86b2b95352c3.png?auth_key=1884656550-c8f6932d1c8b4889bf7d79f7ee266a17-0-3c559c8fcc111321c0931980312d1a34" alt="PLC S7-1500" style="object-fit: contain;">
+                    <div class="card-content">
+                        <h3>PLC زیمنس S7-1500</h3>
+                        <p>پیاده‌سازی کنترلرهای پیشرفته S7-1500 برای فرآیندهای پیچیده صنعتی با سرعت پردازش بالا و قابلیت‌های امنیتی.</p>
+                    </div>
+                </div>
+                <!-- عکس واقعی PCS 7 زیمنس (کابینت S7-400) اضافه شد -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/03288738-f995-493c-bb21-f8b8bf244a03.jpg?auth_key=1884658771-6a02bade35e442bb9a4f97ab1b32c6c6-0-2c21d29e3f7a85ea263bb553cecb5fdd" alt="SIMATIC PCS 7">
+                    <div class="card-content">
+                        <h3>SIMATIC PCS 7 زیمنس</h3>
+                        <p>طراحی و اجرای سیستم‌های کنترل متمرکز (DCS) بر پایه کابینت‌های S7-400 برای پتروشیمی‌ها و پالایشگاه‌ها.</p>
+                    </div>
+                </div>
+                <!-- عکس واقعی DeltaV Emerson -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/45127b7a-cca0-44d8-87dd-097201ff91e9.png?auth_key=1884658050-30a65504d0d44c90b07fbc2b0d62b225-0-7b0a652d4c6ae67522dd89782ca338f7" alt="کارت‌های DeltaV Emerson" style="object-fit: contain;">
+                    <div class="card-content">
+                        <h3>DeltaV Emerson</h3>
+                        <p>تامین، کانفیگ و راه‌اندازی کارت‌های ورودی/خروجی (I/O Cards) سیستم DCS امسرون DeltaV Emerson برای صنایع نفت و گاز.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه درباره ما -->
+    <div id="page-about" class="page-content">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">درباره کنترل آموز شرق</h2>
+            </div>
+            <div class="about-box">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1470&auto=format&fit=crop" alt="محیط کار مهندسی" style="width:100%; height:300px; object-fit:cover; border-radius:8px; margin-bottom:20px;">
+                <p>شرکت «کنترل آموز شرق» در سال ۱۳۸۴ با هدف آموزش و ارائه خدمات مهندسی به صنایع گوناگون شروع به فعالیت کرد و در این راستا با به کارگیری علم روز جهت ارتقاء و نوسازی سیستم‌های اتوماسیون صنعتی اهتمام ورزید است.</p>
+                <p>با توجه به عدم همکاری شرکت‌های خارجی در ارائه خدمات به صنایع، نیاز به حضور یک شرکت ملی و متخصص احساس می‌شد. ما با به کارگیری متخصص‌ترین افراد سعی بر آن داریم تا پاسخگوی نیاز صنایع در امر طراحی، اجرا و تعمیرات و نگهداری سیستم‌های اتوماسیون صنعتی باشیم.</p>
+                <p>از جمله افتخارات موسسین این شرکت، اجرای پروژه‌های صنعتی در پتروشیمی‌ها، صنایع غذایی و لبنی و نیز برگزاری دوره‌های آموزشی سیستم‌های کنترلی در مراکز فنی و حرفه‌ای می‌باشد.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه سیستم‌ها و خدمات -->
+    <div id="page-systems" class="page-content">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">خدمات تخصصی شرکت</h2>
+            </div>
+            <div class="services-list">
+                <div class="service-item"><span>01</span><div>مشاوره، طراحی و اجرای سیستم‌های ابزار دقیق و اتوماسیون صنعتی</div></div>
+                <div class="service-item"><span>02</span><div>تعمیر و نگهداری سیستم‌های ابزار دقیق و اتوماسیون صنعتی</div></div>
+                <div class="service-item"><span>03</span><div>تامین و فروش تجهیزات ابزار دقیق و کنترل</div></div>
+                <div class="service-item"><span>04</span><div>نصب و راه‌اندازی تجهیزات کنترلی و ابزار دقیق</div></div>
+                <div class="service-item"><span>05</span><div>تنظیم و کالیبراسیون تجهیزات ابزار دقیق</div></div>
+                <div class="service-item"><span>06</span><div>برگزاری دوره‌های آموزشی در زمینه ابزار دقیق و اتوماسیون صنعتی</div></div>
+            </div>
+
+            <div class="text-center">
+                <h2 class="section-title">سیستم‌ها و تجهیزات</h2>
+            </div>
+            <div class="cards">
+                <!-- عکس واقعی S7-1200 زیمنس -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/144dc3da-c4d6-4140-8436-aaad457136cf.png?auth_key=1884656550-e2b249c666d74981bf9e964f8e9aab3d-0-0ed725708195b22ac2416ec8c06292b8" alt="PLC S7-1200" style="object-fit: contain;">
+                    <div class="card-content">
+                        <h3>کنترلر زیمنس S7-1200</h3>
+                        <p>کنترلرهای فشرده و اقتصادی زیمنس مناسب برای صنایع غذایی، بسته‌بندی و ماشین‌سازی.</p>
+                    </div>
+                </div>
+                <!-- عکس واقعی S7-1500 زیمنس -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/f6e2057f-3488-4a48-b532-86b2b95352c3.png?auth_key=1884656550-c8f6932d1c8b4889bf7d79f7ee266a17-0-3c559c8fcc111321c0931980312d1a34" alt="PLC S7-1500" style="object-fit: contain;">
+                    <div class="card-content">
+                        <h3>کنترلر زیمنس S7-1500</h3>
+                        <p>قدرتمندترین PLC زیمنس برای نیروگاه‌ها و پتروشیمی‌ها با ارتباطات پیشرفته (Profinet).</p>
+                    </div>
+                </div>
+                <!-- عکس واقعی PCS 7 زیمنس (کابینت S7-400) جایگزین شد -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/03288738-f995-493c-bb21-f8b8bf244a03.jpg?auth_key=1884658771-6a02bade35e442bb9a4f97ab1b32c6c6-0-2c21d29e3f7a85ea263bb553cecb5fdd" alt="SIMATIC PCS 7">
+                    <div class="card-content">
+                        <h3>SIMATIC PCS 7 زیمنس</h3>
+                        <p>سیستم کنترل توزیع شده (DCS) زیمنس برای یکپارچه‌سازی کنترلرها و HMI در پالایشگاه‌ها.</p>
+                    </div>
+                </div>
+                <!-- عکس واقعی DeltaV Emerson -->
+                <div class="card">
+                    <img src="https://z-cdn-media.chatglm.cn/files/45127b7a-cca0-44d8-87dd-097201ff91e9.png?auth_key=1884658050-30a65504d0d44c90b07fbc2b0d62b225-0-7b0a652d4c6ae67522dd89782ca338f7" alt="کارت‌های DeltaV Emerson" style="object-fit: contain;">
+                    <div class="card-content">
+                        <h3>کارت‌های I/O DeltaV Emerson</h3>
+                        <p>کارت‌های ورودی/خروجی DeltaV Emerson با طراحی ماژولار برای توسعه آسان سیستم‌های کنترلی.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه رزومه و پروژه‌ها -->
+    <div id="page-projects" class="page-content">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">رزومه و پروژه‌های اجرا شده</h2>
+                <p style="margin-bottom: 40px;">گزیده‌ای از پروژه‌های موفق شرکت کنترل آموز شرق در صنایع مختلف</p>
+            </div>
+            
+            <div class="project-category">
+                <h3>پتروشیمی و نیروگاهی</h3>
+                <ul class="project-list">
+                    <li>طراحی و ساخت سیستم مانیتورینگ واحد N2 Plant ازت پتروشیمی خراسان <span class="project-tag">WINCC</span></li>
+                    <li>طراحی و ساخت سیستم کنترل و مانیتورینگ ACF & MIX BED پتروشیمی خراسان <span class="project-tag">PLC CONTRONIC & WINCC</span></li>
+                    <li>نصب و راه‌اندازی پروژه بویلر 70 تنی چهارم پتروشیمی خراسان <span class="project-tag">PCS7</span></li>
+                    <li>همکاری در نصب و راه‌اندازی بویلر 70 تنی پتروشیمی کرمانشاه <span class="project-tag">PCS7</span></li>
+                    <li>همکاری در راه‌اندازی واحد آب پتروشیمی کرمانشاه <span class="project-tag">PLCS7 400 & WINCC</span></li>
+                    <li>همکاری در نصب و راه‌اندازی واحد ازت پتروشیمی کرمانشاه <span class="project-tag">PLCS7300 & FUJI TP</span></li>
+                    <li>همکاری در راه‌اندازی سیستم FCS و ESD کمپرسورهای مجتمع پتروشیمی کرمانشاه <span class="project-tag">YOKOGAWA & HIMA</span></li>
+                    <li>همکاری در راه‌اندازی پکیج‌های بسته‌بندی واحد پلی‌کربنات پتروشیمی خوزستان <span class="project-tag">PLC S7</span></li>
+                    <li>طراحی و ساخت سیستم Gas detector مجتمع پتروشیمی خراسان <span class="project-tag">S7 1200</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ بارگیری مجتمع آمونیاک پتروشیمی خراسان <span class="project-tag">S7 1200, TP SIEMENS</span></li>
+                    <li>نظارت و همکاری در طراحی، اجرا و راه‌اندازی واحد DCS جدید نیروگاه پتروشیمی خراسان <span class="project-tag">PCS7 8.2</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط UF پتروشیمی خراسان <span class="project-tag">PLCS7 300 & WINCC</span></li>
+                    <li>همکاری در طراحی و اجرای سیستم مانیتورینگ بارگیری اوره پتروشیمی خراسان <span class="project-tag">WINCC</span></li>
+                </ul>
+            </div>
+
+            <div class="project-category">
+                <h3>صنایع غذایی و لبنی</h3>
+                <ul class="project-list">
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط خوراک دام تعاونی الغدیر بجنورد <span class="project-tag">PLCS7 300 & WINCC</span></li>
+                    <li>طراحی و اجرای برنامه مانیتورینگ خط بسته‌بندی کارخانه آسه آرد <span class="project-tag">WINCC</span></li>
+                    <li>طراحی و اجرای سیستم مانیتورینگ خط شکلات شرکت دینا توس <span class="project-tag">PLCS7 300 & CITECT</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط چی‌پف دینا توس <span class="project-tag">ALLEN BRADLY & EASY VIEW</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط تولید چیپس دینا توس <span class="project-tag">PLCS7 300 & WINCC</span></li>
+                    <li>پروژه طراحی و اجرای سیستم کنترل و مانیتورینگ CIP کارخانه شماره 2 پگاه مشهد <span class="project-tag">PLCS7 300 & PROTOOL</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط ماست چکیده پگاه مشهد 2 <span class="project-tag">PLCS7 300 & PROTOOL</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط پودر پنیر پرور پودر <span class="project-tag">PLCS7 300 & WINCC FLEXIBLE</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ خط تولید چیپس صنایع شهد پاک <span class="project-tag">PLCS7 300 & WINCC</span></li>
+                    <li>برنامه‌نویسی و راه‌اندازی سیستم کنترل خط طعم‌زن چیپس شهد پاک <span class="project-tag">تاپیس</span></li>
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ طعم‌زن چیپس خطوط 1 و 2 دینا <span class="project-tag">S7 1200, TP</span></li>
+                    <li>طراحی و اجرای سیستم مانیتورینگ شرکت دینا <span class="project-tag">WINCC (COX PLAN)</span></li>
+                </ul>
+            </div>
+
+            <div class="project-category">
+                <h3>پروژه‌های ویژه و آموزشی</h3>
+                <ul class="project-list">
+                    <li>طراحی و اجرای سیستم کنترل و مانیتورینگ آسانسور صنعتی برج پریل مجتمع پتروشیمی خراسان <span class="project-tag">S7 & WINCC FLEXIBLE</span></li>
+                    <li>بهینه‌سازی سیستم کنترل و مانیتورینگ خط کرانچی شرکت دینا توس <span class="project-tag">چیتوز</span></li>
+                    <li>برگزاری دوره آموزشی PLC در شرکت پگاه مشهد 2 <span class="project-tag">آموزش</span></li>
+                    <li>برگزاری دوره آموزشی میکروکنترلر، PLC S5 & S7 و WINCC در پتروشیمی خراسان <span class="project-tag">آموزش</span></li>
+                    <li>برگزاری دوره‌های آموزشی سیستم‌های کنترلی زیمنس در مرکز آموزش کنترل آموز شرق <span class="project-tag">PLC, WINCC, PROTOOL</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه تماس با ما -->
+    <div id="page-contact" class="page-content">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">تماس با کنترل آموز شرق</h2>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-form">
+                    <h3>فرم درخواست مشاوره</h3>
+                    <form onsubmit="alert('پیام شما ارسال شد! در اسرع وقت تماس می‌گیریم.'); return false;">
+                        <input type="text" placeholder="نام و نام خانوادگی" required>
+                        <input type="email" placeholder="ایمیل" required>
+                        <input type="tel" placeholder="شماره تماس" required>
+                        <textarea rows="5" placeholder="متن پیام یا درخواست پروژه" required></textarea>
+                        <button type="submit">ارسال درخواست</button>
+                    </form>
+                </div>
+                <div>
+                    <div class="contact-info-box">
+                        <h3>اطلاعات تماس</h3>
+                        <p><strong>تلفن تماس:</strong><br>00989338204351</p>
+                        <p><strong>ایمیل:</strong><br>control.amooz@gmail.com</p>
+                        <p><strong>وب‌سایت:</strong><br>www.controlas.ir</p>
+                        <p><strong>حوزه فعالیت:</strong><br>مشاوره، طراحی و اجرای سیستم‌های ابزار دقیق و اتوماسیون صنعتی</p>
+                    </div>
+                    <div style="margin-top: 20px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=1470&auto=format&fit=crop" alt="نقشه مشهد" style="width:100%; height:200px; object-fit:cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© ۱۴۰۳ - تمامی حقوق برای شرکت کنترل آموز شرق محفوظ است.</p>
+        <p>طراحی شده برای controlas.ir</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            var pages = document.getElementsByClassName('page-content');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active');
+            }
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            var navLinks = document.querySelectorAll('nav a');
+            for (var i = 0; i < navLinks.length; i++) {
+                navLinks[i].classList.remove('active');
+            }
+            document.getElementById('nav-' + pageId).classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
